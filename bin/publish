@@ -1,0 +1,20 @@
+#! /usr/bin/ruby
+
+require 'bunny_burrow'
+require 'yaml'
+
+config = YAML.load_file('config.yml')
+
+rpc_client = BunnyBurrow::Client.new do |client|
+  client.rabbitmq_url = config["rabbitmq_url"]
+  client.rabbitmq_exchange = config["rabbitmq_exchange"]
+  client.logger = Logger.new(STDOUT)
+end
+
+payload = config["payload"]
+
+response = rpc_client.publish(payload, config["routing_key"])
+
+p response
+
+rpc_client.shutdown

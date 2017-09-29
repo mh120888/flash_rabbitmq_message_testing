@@ -1,0 +1,6 @@
+rabbitmq_url: 'amqp://rabbitmq_url'
+rabbitmq_exchange: 'exchange'
+routing_key: 'org.command.some_routing_key'
+payload:
+	name: 'Bob Smith'
+	age: '40'
